@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Athavar.FFXIV.Plugin": {
+      "commandName": "Project",
+      "commandLineArgs": "/S /C \\\"start \\\"title\\\" /B \\\"%ProgramW6432%\\\\Elgato\\\\StreamDeck\\\\StreamDeck.exe\\",
+      "nativeDebugging": true
+    }
+  }
+}

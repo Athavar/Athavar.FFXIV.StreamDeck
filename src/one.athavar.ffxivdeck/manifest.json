@@ -1,0 +1,46 @@
+﻿{
+  "$schema": "https://raw.githubusercontent.com/GeekyEggo/SharpDeck/master/src/SharpDeck.PropertyInspector/manifest-schema.json",
+  "Name": "FFxiv Integration",
+  "Version": "0.0.1",
+  "Author": "Athavar",
+  "Actions": [
+    {
+      "Name": "Chat",
+      "UUID": "one.athavar.ffxivdeck.chat",
+      "Icon": "Images/Action/Chat",
+      "Tooltip": "Send a message to chat",
+      "States": [
+        {
+          "Image": "Images/Icon/Chat"
+        }
+      ]
+    },
+    {
+      "Name": "GearSet",
+      "UUID": "one.athavar.ffxivdeck.gearset",
+      "Icon": "Images/Action/GearSet",
+      "Tooltip": "Change GearSet",
+      "States": [
+        {
+          "Image": "Images/Icon/GearSet"
+        }
+      ]
+    }
+  ],
+  "Category": "Final Fantasy 14",
+  "CategoryIcon": "Images/Plugin/Category",
+  "CodePath": "one.athavar.ffxivdeck.exe",
+  "Description": "A integration for Final Fantasy 14",
+  "Icon": "Images/Plugin/Icon",
+  "PropertyInspectorPath": "pi/index.html",
+  "SDKVersion": 2,
+  "Software": {
+    "MinimumVersion": "4.1"
+  },
+  "OS": [
+    {
+      "MinimumVersion": "10",
+      "Platform": "windows"
+    }
+  ]
+}

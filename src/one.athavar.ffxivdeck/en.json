@@ -1,0 +1,20 @@
+﻿{
+  "Name": "Final Fantasy 14 integration",
+  "Category": "Final Fantasy 14",
+  "Description": "Control your experience in Final Fantasy 14.",
+  "one.athavar.ffxivdeck.chat": {
+    "Name": "Chat",
+    "Tooltip": "Send message to chat."
+  },
+  "one.athavar.ffxivdeck.gearset": {
+    "Name": "GearSet",
+    "Tooltip": "Change the equipped GearSet."
+  },
+  "Localization": {
+    "PI": {
+      "Message": "Message",
+      "GearSet": "GearSet",
+      "GlamourPlate": "GlamourPlate"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "Author": "Athavar",
+  "Name": "StreamDeck Integration",
+  "Punchline": "Enchant your experience.",
+  "Description": "Connected FFXIV with the StreamDeck.",
+  "RepoUrl": "https://github.com/Athavar/Athavar.FFXIV.StreamDeckPlugin",
+  "ImageUrls": [],
+  "IconUrl": "https://raw.githubusercontent.com/Athavar/Athavar.FFXIV.DalaRepo/master/plugins/Athavar.FFXIV.StreamDeckPlugin/images/icon.png"
+}
