@@ -37,7 +37,7 @@ jobs:
 
       - name: Build Dalamud Plugin
         run: |
-          dotnet restore -r win ${{ env.SOLUTION_NAME }} -v n
+          dotnet restore -r win -v n
           dotnet build --configuration Release -v n src\${{ env.RELEASE_DALAMUD_DIR }}
           xcopy ${{ env.RELEASE_DALAMUD_DIR }} ${{ env.DIST_DIR }}
         env:
