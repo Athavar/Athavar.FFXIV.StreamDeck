@@ -1,7 +1,7 @@
 ﻿{
   "$schema": "https://raw.githubusercontent.com/GeekyEggo/SharpDeck/master/src/SharpDeck.PropertyInspector/manifest-schema.json",
   "Name": "FFxiv Integration",
-  "Version": "0.0.1",
+  "Version": "1.0.0",
   "Author": "Athavar",
   "Actions": [
     {

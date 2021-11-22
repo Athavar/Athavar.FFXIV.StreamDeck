@@ -43,7 +43,7 @@ jobs:
         env:
           DOTNET_CLI_TELEMETRY_OPTOUT: true
 
-      - name: Build & Distribution StreamerDeck
+      - name: Build & Distribution StreamDeck Plugin
         run: |
           dotnet publish --configuration Release -r win-x64 -p:PublishSingleFile=true -p:PublishTrimmed=true -p:PublishReadyToRun=true --self-contained true -v n -o Source\${{ env.PROJECT_STREAMDECK }}.sdPlugin src\${{ env.PROJECT_STREAMDECK }}
           tools\DistributionTool.exe -b -i Source\${{ env.PROJECT_STREAMDECK }}.sdPlugin -o ${{ env.DIST_DIR }}
