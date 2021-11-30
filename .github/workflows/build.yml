@@ -39,7 +39,7 @@ jobs:
         run: |
           dotnet restore -r win -v n
           dotnet build --configuration Release -v n src\${{ env.PROJECT_DALAMUD }}
-          xcopy ${{ env.RELEASE_DALAMUD_DIR }} ${{ env.DIST_DIR }}
+          xcopy ${{ env.RELEASE_DALAMUD_DIR }} ${{ env.DIST_DIR }} /E
         env:
           DOTNET_CLI_TELEMETRY_OPTOUT: true
 

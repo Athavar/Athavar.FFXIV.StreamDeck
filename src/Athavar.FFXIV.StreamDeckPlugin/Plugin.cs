@@ -31,7 +31,7 @@ public class Plugin : IDalamudPlugin
     /// <summary>
     ///     The Plugin name.
     /// </summary>
-    internal const string PluginName = "Athavar's StreamDeck integration";
+    internal const string PluginName = "StreamDeck Integration";
 
     private readonly IHostLifetime hostLifetime;
 
