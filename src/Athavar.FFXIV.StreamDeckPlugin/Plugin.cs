@@ -66,6 +66,9 @@ public class Plugin : IDalamudPlugin
         var task = this.hostLifetime.StopAsync(CancellationToken.None);
         task.Wait();
 
+        task = this.host.StopAsync(CancellationToken.None);
+        task.Wait();
+
         this.host.Dispose();
     }
 
