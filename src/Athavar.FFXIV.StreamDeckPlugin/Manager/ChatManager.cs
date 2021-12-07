@@ -8,8 +8,12 @@ using System;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Channels;
+using Athavar.FFXIV.StreamDeckPlugin;
+using Athavar.FFXIV.StreamDeckPlugin.Helper;
 using Athavar.FFXIV.StreamDeckPlugin.Manager.Interface;
 using Dalamud.Game;
+using Dalamud.Game.Text.SeStringHandling;
+using Dalamud.Game.Text.SeStringHandling.Payloads;
 using FFXIVClientStructs.FFXIV.Client.UI;
 
 /// <summary>
@@ -17,7 +21,7 @@ using FFXIVClientStructs.FFXIV.Client.UI;
 /// </summary>
 internal class ChatManager : IDisposable, IChatManager
 {
-    private readonly Channel<string> chatBoxMessages = Channel.CreateUnbounded<string>();
+    private readonly Channel<SeString> chatBoxMessages = Channel.CreateUnbounded<SeString>();
     private readonly IDalamudServices dalamud;
     private readonly ProcessChatBoxDelegate processChatBox;
 
@@ -45,32 +49,31 @@ internal class ChatManager : IDisposable, IChatManager
         this.chatBoxMessages.Writer.Complete();
     }
 
-    /// <summary>
-    ///     Print a normal message.
-    /// </summary>
-    /// <param name="message">The message to print.</param>
-    public void PrintMessage(string message)
+    /// <inheritdoc/>
+    public void PrintInformationMessage(string message) => this.dalamud.ChatGui.Print($"[{Plugin.PluginName}] {message}");
+
+    /// <inheritdoc/>
+    public void PrintInformationMessage(SeString message)
     {
+        message.Payloads.Insert(0, new TextPayload($"[{Plugin.PluginName}] "));
         this.dalamud.ChatGui.Print(message);
     }
 
-    /// <summary>
-    ///     Print an error message.
-    /// </summary>
-    /// <param name="message">The message to print.</param>
-    public void PrintError(string message)
+    /// <inheritdoc/>
+    public void PrintErrorMessage(string message) => this.dalamud.ChatGui.PrintError($"[{Plugin.PluginName}] {message}");
+
+    /// <inheritdoc/>
+    public void PrintErrorMessage(SeString message)
     {
+        message.Payloads.Insert(0, new TextPayload($"[{Plugin.PluginName}] "));
         this.dalamud.ChatGui.PrintError(message);
     }
 
-    /// <summary>
-    ///     Process a command through the chat box.
-    /// </summary>
-    /// <param name="message">Message to send.</param>
-    public async void SendMessage(string message)
-    {
-        await this.chatBoxMessages.Writer.WriteAsync(message);
-    }
+    /// <inheritdoc/>
+    public async void SendMessage(string message) => await this.chatBoxMessages.Writer.WriteAsync(SeStringHelper.Parse(message));
+
+    /// <inheritdoc/>
+    public async void SendMessage(SeString message) => await this.chatBoxMessages.Writer.WriteAsync(message);
 
     private void FrameworkUpdate(Framework framework)
     {
@@ -85,13 +88,34 @@ internal class ChatManager : IDisposable, IChatManager
         var framework = FFXIVClientStructs.FFXIV.Client.System.Framework.Framework.Instance();
         var uiModule = framework->GetUiModule();
 
-        using var payload = new ChatPayload(message);
+        using var payload = new ChatPayload(Encoding.UTF8.GetBytes(message));
         var payloadPtr = Marshal.AllocHGlobal(400);
         Marshal.StructureToPtr(payload, payloadPtr, false);
 
         this.processChatBox(uiModule, payloadPtr, IntPtr.Zero, 0);
 
         Marshal.FreeHGlobal(payloadPtr);
+    }
+
+    private unsafe void SendMessageInternal(SeString message)
+    {
+        var messagePayload = message.Encode();
+        if (messagePayload.Length > 500)
+        {
+            this.PrintErrorMessage($"Message exceeds byte size of 500({messagePayload.Length})");
+            return;
+        }
+
+        var framework = FFXIVClientStructs.FFXIV.Client.System.Framework.Framework.Instance();
+        var uiModule = framework->GetUiModule();
+
+        using var chatPayload = new ChatPayload(messagePayload);
+        var chatPayloadPtr = Marshal.AllocHGlobal(Marshal.SizeOf<ChatPayload>());
+        Marshal.StructureToPtr(chatPayload, chatPayloadPtr, false);
+
+        this.processChatBox(uiModule, chatPayloadPtr, IntPtr.Zero, 0);
+
+        Marshal.FreeHGlobal(chatPayloadPtr);
     }
 
     [StructLayout(LayoutKind.Explicit)]
@@ -112,23 +136,19 @@ internal class ChatManager : IDisposable, IChatManager
         [FieldOffset(24)]
         private readonly ulong unk2;
 
-        internal ChatPayload(string text)
+        internal ChatPayload(byte[] payload)
         {
-            var stringBytes = Encoding.UTF8.GetBytes(text);
-            this.textPtr = Marshal.AllocHGlobal(stringBytes.Length + 30);
+            this.textPtr = Marshal.AllocHGlobal(payload.Length + 30);
 
-            Marshal.Copy(stringBytes, 0, this.textPtr, stringBytes.Length);
-            Marshal.WriteByte(this.textPtr + stringBytes.Length, 0);
+            Marshal.Copy(payload, 0, this.textPtr, payload.Length);
+            Marshal.WriteByte(this.textPtr + payload.Length, 0);
 
-            this.textLen = (ulong)(stringBytes.Length + 1);
+            this.textLen = (ulong)(payload.Length + 1);
 
             this.unk1 = 64;
             this.unk2 = 0;
         }
 
-        public void Dispose()
-        {
-            Marshal.FreeHGlobal(this.textPtr);
-        }
+        public void Dispose() => Marshal.FreeHGlobal(this.textPtr);
     }
 }

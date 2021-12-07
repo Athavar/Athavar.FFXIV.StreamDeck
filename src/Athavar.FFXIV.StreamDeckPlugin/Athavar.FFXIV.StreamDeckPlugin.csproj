@@ -7,7 +7,7 @@
         <Authors>Athavar</Authors>
         <AssemblyTitle>Athavar.FFXIV.StreamDeckPlugin</AssemblyTitle>
         <Company>absolution</Company>
-        <Version>1.0.2</Version>
+        <Version>1.1.0</Version>
         <Description>A plugin to provide integration between final fantqaasy 14 and Stream Deck.</Description>
         <Copyright>Copyright © 2021</Copyright>
         <PackageProjectUrl>https://github.com/Athavar/Athavar.FFXIV.StreamDeckPlugin</PackageProjectUrl>
@@ -22,7 +22,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Content Include="icon.png" Link="images\icon.png" CopyToOutputDirectory="PreserveNewest" Visible="false"/>
+        <Content Include="icon.png" Link="images\icon.png" CopyToOutputDirectory="PreserveNewest" Visible="false" />
     </ItemGroup>
 
     <PropertyGroup>
@@ -37,32 +37,32 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="..\..\.editorconfig" Link=".editorconfig"/>
-        <AdditionalFiles Include="..\..\stylecop.json" Link="stylecop.json"/>
+        <None Include="..\..\.editorconfig" Link=".editorconfig" />
+        <AdditionalFiles Include="..\..\stylecop.json" Link="stylecop.json" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="DalamudPackager" Version="2.1.4"/>
+        <PackageReference Include="DalamudPackager" Version="2.1.5" />
         <!--PackageReference Include="ILRepack.Lib.MSBuild" Version="2.1.17.1" /-->
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0"/>
-        <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
         <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.354">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="System.Drawing.Common" Version="6.0.0"/>
-        <PackageReference Include="System.Text.Json" Version="6.0.0"/>
-        <ProjectReference Include="..\Athavar.Common.Connectivity\Athavar.Common.Connectivity.csproj"/>
-        <ProjectReference Include="..\Athavar.FFXIV.ConnectivityContacts\Athavar.FFXIV.ConnectivityContacts.csproj"/>
+        <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
+        <PackageReference Include="System.Text.Json" Version="6.0.0" />
+        <ProjectReference Include="..\Athavar.Common.Connectivity\Athavar.Common.Connectivity.csproj" />
+        <ProjectReference Include="..\Athavar.FFXIV.ConnectivityContacts\Athavar.FFXIV.ConnectivityContacts.csproj" />
         <Reference Include="FFXIVClientStructs">
             <HintPath>$(DalamudLibPath)FFXIVClientStructs.dll</HintPath>
             <Private>false</Private>
         </Reference>
-        <Reference Include="Newtonsoft.Json" Private="False"/>
-        <Reference Include="Dalamud" Private="False"/>
-        <Reference Include="ImGui.NET" Private="False"/>
-        <Reference Include="ImGuiScene" Private="False"/>
-        <Reference Include="Lumina" Private="False"/>
-        <Reference Include="Lumina.Excel" Private="False"/>
+        <Reference Include="Newtonsoft.Json" Private="False" />
+        <Reference Include="Dalamud" Private="False" />
+        <Reference Include="ImGui.NET" Private="False" />
+        <Reference Include="ImGuiScene" Private="False" />
+        <Reference Include="Lumina" Private="False" />
+        <Reference Include="Lumina.Excel" Private="False" />
     </ItemGroup>
 </Project>
