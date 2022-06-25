@@ -22,7 +22,7 @@ internal class IpcManager : IIpcManager
         this.logger = logger;
         this.penumbraApiVersionSubscriber = dalamudServices.PluginInterface.GetIpcSubscriber<int>("Penumbra.ApiVersion");
 
-        if (this.PenumbraApiVersion == 3)
+        if (this.PenumbraApiVersion == 4)
         {
             this.penumbraResolveDefaultSubscriber = dalamudServices.PluginInterface.GetIpcSubscriber<string, string>("Penumbra.ResolveDefaultPath");
             this.PenumbraEnabled = true;

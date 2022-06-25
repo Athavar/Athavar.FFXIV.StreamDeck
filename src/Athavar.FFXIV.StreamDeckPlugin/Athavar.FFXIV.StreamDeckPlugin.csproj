@@ -7,7 +7,7 @@
         <Authors>Athavar</Authors>
         <AssemblyTitle>Athavar.FFXIV.StreamDeckPlugin</AssemblyTitle>
         <Company>absolution</Company>
-        <Version>1.1.1</Version>
+        <Version>1.1.2</Version>
         <Description>A plugin to provide integration between final fantqaasy 14 and Stream Deck.</Description>
         <Copyright>Copyright © 2022</Copyright>
         <PackageProjectUrl>https://github.com/Athavar/Athavar.FFXIV.StreamDeckPlugin</PackageProjectUrl>
@@ -42,7 +42,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="DalamudPackager" Version="2.1.6" />
+        <PackageReference Include="DalamudPackager" Version="2.1.7" />
         <!--PackageReference Include="ILRepack.Lib.MSBuild" Version="2.1.17.1" /-->
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
         <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
@@ -51,7 +51,7 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
-        <PackageReference Include="System.Text.Json" Version="6.0.3" />
+        <PackageReference Include="System.Text.Json" Version="6.0.5" />
         <ProjectReference Include="..\Athavar.Common.Connectivity\Athavar.Common.Connectivity.csproj" />
         <ProjectReference Include="..\Athavar.FFXIV.ConnectivityContacts\Athavar.FFXIV.ConnectivityContacts.csproj" />
         <Reference Include="FFXIVClientStructs">
