@@ -1,6 +1,9 @@
 ﻿namespace Athavar.FFXIV.StreamDeckPlugin.Manager;
 
+using System;
+using Dalamud.Logging;
 using Dalamud.Plugin.Ipc;
+using Dalamud.Plugin.Ipc.Exceptions;
 using Microsoft.Extensions.Logging;
 
 /// <summary>
@@ -22,11 +25,13 @@ internal class IpcManager : IIpcManager
         this.logger = logger;
         this.penumbraApiVersionSubscriber = dalamudServices.PluginInterface.GetIpcSubscriber<int>("Penumbra.ApiVersion");
 
-        if (this.PenumbraApiVersion == 4)
+        if (!dalamudServices.PluginInterface.PluginNames.Contains("Penumbra") || this.PenumbraApiVersion == -1)
         {
-            this.penumbraResolveDefaultSubscriber = dalamudServices.PluginInterface.GetIpcSubscriber<string, string>("Penumbra.ResolveDefaultPath");
-            this.PenumbraEnabled = true;
+            return;
         }
+
+        this.penumbraResolveDefaultSubscriber = dalamudServices.PluginInterface.GetIpcSubscriber<string, string>("Penumbra.ResolveDefaultPath");
+        this.PenumbraEnabled = true;
     }
 
     /// <inheritdoc />
@@ -38,15 +43,19 @@ internal class IpcManager : IIpcManager
             {
                 return this.penumbraApiVersionSubscriber.InvokeFunc();
             }
-            catch
+            catch (IpcNotReadyError)
             {
                 return 0;
+            }
+            catch
+            {
+                return -1;
             }
         }
     }
 
     /// <inheritdoc />
-    public bool PenumbraEnabled { get; }
+    public bool PenumbraEnabled { get; set; }
 
     /// <inheritdoc />
     public string ResolvePenumbraPath(string path)
@@ -66,8 +75,14 @@ internal class IpcManager : IIpcManager
 
             return resolved;
         }
-        catch
+        catch (IpcNotReadyError)
         {
+            return path;
+        }
+        catch (Exception ex)
+        {
+            PluginLog.Error(ex, "Failed while try to use Penumbra IPC. Disable integration");
+            this.PenumbraEnabled = false;
             return path;
         }
     }
