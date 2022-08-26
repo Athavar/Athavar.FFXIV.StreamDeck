@@ -5,7 +5,7 @@ internal interface IIpcManager
     /// <summary>
     ///     Gets the penumbra api version.
     /// </summary>
-    int PenumbraApiVersion { get; }
+    (int Breaking, int Features) PenumbraApiVersion { get; }
 
     /// <summary>
     ///     Gets a value indicating whether penumbra is enabled or not.

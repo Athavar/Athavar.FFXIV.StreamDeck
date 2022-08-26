@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 internal class IpcManager : IIpcManager
 {
     private readonly ILogger logger;
-    private readonly ICallGateSubscriber<int> penumbraApiVersionSubscriber;
+    private readonly ICallGateSubscriber<(int Breaking, int Features)> penumbraApiVersionSubscriber;
     private readonly ICallGateSubscriber<string, string>? penumbraResolveDefaultSubscriber;
 
     /// <summary>
@@ -23,9 +23,9 @@ internal class IpcManager : IIpcManager
     public IpcManager(ILogger<IpcManager> logger, IDalamudServices dalamudServices)
     {
         this.logger = logger;
-        this.penumbraApiVersionSubscriber = dalamudServices.PluginInterface.GetIpcSubscriber<int>("Penumbra.ApiVersion");
+        this.penumbraApiVersionSubscriber = dalamudServices.PluginInterface.GetIpcSubscriber<(int Breaking, int Features)>("Penumbra.ApiVersions");
 
-        if (!dalamudServices.PluginInterface.PluginNames.Contains("Penumbra") || this.PenumbraApiVersion == -1)
+        if (!dalamudServices.PluginInterface.PluginNames.Contains("Penumbra") || this.PenumbraApiVersion.Breaking == 4)
         {
             return;
         }
@@ -35,7 +35,7 @@ internal class IpcManager : IIpcManager
     }
 
     /// <inheritdoc />
-    public int PenumbraApiVersion
+    public (int Breaking, int Features) PenumbraApiVersion
     {
         get
         {
@@ -45,11 +45,11 @@ internal class IpcManager : IIpcManager
             }
             catch (IpcNotReadyError)
             {
-                return 0;
+                return (0, 0);
             }
             catch
             {
-                return -1;
+                return (-1, -1);
             }
         }
     }
