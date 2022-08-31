@@ -14,7 +14,7 @@ env:
   PROJECT_DALAMUD: Athavar.FFXIV.StreamDeckPlugin
   PROJECT_STREAMDECK: one.athavar.ffxivdeck
   INTERNAL_NAME: Athavar.FFXIV.StreamDeckPlugin
-  RELEASE_DALAMUD_DIR: src\Athavar.FFXIV.StreamDeckPlugin\bin\Release\net5.0-windows\Athavar.FFXIV.StreamDeckPlugin
+  RELEASE_DALAMUD_DIR: src\Athavar.FFXIV.StreamDeckPlugin\bin\Release\net6.0-windows\Athavar.FFXIV.StreamDeckPlugin
   DIST_DIR: dist\
   PERSONAL_PLUGIN_REPO: Athavar/Athavar.FFXIV.DalaRepo
 
@@ -74,5 +74,5 @@ jobs:
         with:
           add: --all
           author_name: GitHub Action
-          author_email: github-actions[bot]@users.noreply.github.com
+          author_email: actions@github.com
           message: Update ${{ env.INTERNAL_NAME }}
