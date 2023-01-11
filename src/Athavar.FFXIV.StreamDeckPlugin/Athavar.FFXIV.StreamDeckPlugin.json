@@ -6,5 +6,7 @@
   "RepoUrl": "https://github.com/Athavar/Athavar.FFXIV.StreamDeckPlugin",
   "ImageUrls": [],
   "IconUrl": "https://raw.githubusercontent.com/Athavar/Athavar.FFXIV.DalaRepo/master/plugins/Athavar.FFXIV.StreamDeckPlugin/images/icon.png",
-  "Changelog": "Update for API 6"
+  "Changelog": "Update for API 8",
+  "AcceptsFeedback": false,
+  "IsThirdParty": true
 }

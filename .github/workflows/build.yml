@@ -14,7 +14,7 @@ env:
   PROJECT_DALAMUD: Athavar.FFXIV.StreamDeckPlugin
   PROJECT_STREAMDECK: one.athavar.ffxivdeck
   INTERNAL_NAME: Athavar.FFXIV.StreamDeckPlugin
-  RELEASE_DALAMUD_DIR: src\Athavar.FFXIV.StreamDeckPlugin\bin\Release\net6.0-windows\Athavar.FFXIV.StreamDeckPlugin
+  RELEASE_DALAMUD_DIR: src\Athavar.FFXIV.StreamDeckPlugin\bin\Release\net7.0-windows\Athavar.FFXIV.StreamDeckPlugin
   DIST_DIR: dist\
   PERSONAL_PLUGIN_REPO: Athavar/Athavar.FFXIV.DalaRepo
 
